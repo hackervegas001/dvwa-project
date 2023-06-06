@@ -1,0 +1,30 @@
+medium xss dom vulneability : - 
+
+<?php
+
+// Is there any input?
+if ( array_key_exists( "default", $_GET ) && !is_null ($_GET[ 'default' ]) ) {
+    $default = $_GET['default'];
+    
+    # Do not allow script tags
+    if (stripos ($default, "<script") !== false) {
+        header ("location: ?default=English");
+        exit;
+    }
+}
+
+?> 
+
+
+using select tag 
+perform attack : - 
+the payload that we wil make is in accorance with recon results above. now we will close the 
+<select> tag first and continue with the script that runs javascript like this : 
+
+?default=</select><body onload="alert('Hacked')">
+
+notice from the injection results above , the <select> tag is closed first before the <opton>
+tag and the tag <body> calls the javascirpt funciton.
+
+we can also get cookies as usual: 
+?default=</select><body onload="alert('document.cookie')">
